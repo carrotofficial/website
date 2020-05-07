@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<style>
+		body {
+			font-family: "Monospace";
+			background-color: black;
+			color: green;
+		}
+	</style>
+
+	<body>
+		<p></p>
+	</body>
+
+	<script>
+		var i = 0;
+		var text;
+
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "random.txt");
+		xhr.onreadystatechange = function() {
+  			text = xhr.responseText;
+		}
+		xhr.send();
+
+		setInterval(function(){
+			document.getElementsByTagName("p")[0].innerHTML = text.substring(i*5000, (i*5000) + 5000);
+			i++;
+		
+			// reset i if we run out of characters
+			if (i > 15) {
+				i = 0;
+			}
+		}, 100);
+	</script>
+</html>
